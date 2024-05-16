@@ -1,6 +1,13 @@
 public class Darmo extends Pakiet{
+    private TypPakietu typ;
 
-    Darmo(String nazwa, int okresy) {
-        super(TypPakietu.DARMO, nazwa, okresy);
+    public Darmo(String nazwaPakietu, int okres) {
+        super(nazwaPakietu,1);
+        this.typ = TypPakietu.DARMO;
+    }
+
+    @Override
+    public TypPakietu getTyp() {
+        return typ;
     }
 }
