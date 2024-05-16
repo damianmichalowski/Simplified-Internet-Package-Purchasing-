@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ListaZyczen {
     private ArrayList<Pakiet> listaZyczen;
@@ -11,8 +12,10 @@ public class ListaZyczen {
 
     public String toString() {
         String result = klient.getNazwa() + ":";
+        boolean abonament = klient.getAbonament();
         for (Pakiet p : listaZyczen) {
-            result = result.concat("\n"+p.toString());
+            int cena = p.cenaPakietu(abonament);
+            result = result.concat("\n"+p.toString() + (cena == 0 ? ",ceny brak" : ", cena " + cena));
         }
         return result + "\n";
     }

@@ -5,11 +5,12 @@ public class GBTest {
     static int cena(Koszyk k, String nazwaPakietu) {
         int cena = 0;
         ArrayList<Pakiet> koszyk = k.pobierzKoszyk();
+        boolean abonament = k.getKlient().getAbonament();
 
         for(Pakiet p : koszyk){
             if(p.getNazwaPakietu().equals(nazwaPakietu)){
                 int okres = p.getOkres();
-                cena = p.cenaPakietu() * okres;
+                cena = p.cenaPakietu(abonament) * okres;
             }
         }
 

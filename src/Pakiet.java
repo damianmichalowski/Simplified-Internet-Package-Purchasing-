@@ -10,11 +10,10 @@ public class Pakiet {
     int okres;
     Cennik cennik = Cennik.pobierzCennik();
 
-    Pakiet(String nazwaPakietu, int okres) {
+    Pakiet(String nazwaPakietu, int okres){
         this.nazwaPakietu = nazwaPakietu;
         this.okres = okres;
     }
-
     TypPakietu getTyp() {
         return null;
     }
@@ -26,8 +25,7 @@ public class Pakiet {
     int getOkres() {
         return okres;
     }
-
-    int cenaPakietu() {
+    int cenaPakietu(boolean abonament) {
         return 0;
     }
 
@@ -40,7 +38,9 @@ public class Pakiet {
             case TypPakietu.DARMO -> "darmowy";
             default -> "";
         };
-        return getNazwaPakietu() + ", typ: " + typ + ", ile: " + getOkres() + " okresy"
-                + (cenaPakietu() == 0 ? ",ceny brak" : ", cena " + cenaPakietu());
+
+        return getNazwaPakietu()
+                + ", typ: " + typ
+                + ", ile: " + getOkres() + " okresy";
     }
 }
