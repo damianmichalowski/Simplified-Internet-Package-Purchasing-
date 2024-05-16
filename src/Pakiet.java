@@ -1,39 +1,46 @@
+enum TypPakietu {
+    KROTKI,
+    SREDNI,
+    DLUGI,
+    DARMO
+}
+
 public class Pakiet {
-    TypPakietu typ;
-    String nazwa;
-    int[] okresy;
+    String nazwaPakietu;
+    int okres;
+    Cennik cennik = Cennik.pobierzCennik();
 
-    Pakiet(TypPakietu typ, String nazwa, int... okresy) {
-        this.typ = typ;
-        this.nazwa = nazwa;
-        this.okresy = okresy;
+    Pakiet(String nazwaPakietu, int okres) {
+        this.nazwaPakietu = nazwaPakietu;
+        this.okres = okres;
     }
 
-    public TypPakietu getTyp(){
-        return typ;
+    TypPakietu getTyp() {
+        return null;
     }
 
-    public String getNazwa() {
-        return nazwa;
+    String getNazwaPakietu() {
+        return nazwaPakietu;
     }
 
-    public int[] getOkresy() {
-        return okresy;
+    int getOkres() {
+        return okres;
     }
 
-    private String getTypeToString() {
-        return switch (this.typ) {
-            case KROTKI -> "krótkoterminowy";
-            case SREDNI -> "średnioterminowy";
-            case DLUGI -> "długoterminowy";
-            case DARMO -> "darmowy";
-        };
+    int cenaPakietu() {
+        return 0;
     }
 
+    @Override
     public String toString() {
-        return nazwa + ", typ: " + getTypeToString() + ", ile: " + okresy.length + " okresy, cena ";
+        String typ = switch (getTyp()) {
+            case TypPakietu.KROTKI -> "krótkoterminowy";
+            case TypPakietu.SREDNI -> "średnioterminowy";
+            case TypPakietu.DLUGI -> "długoterminowy";
+            case TypPakietu.DARMO -> "darmowy";
+            default -> "";
+        };
+        return getNazwaPakietu() + ", typ: " + typ + ", ile: " + getOkres() + " okresy"
+                + (cenaPakietu() == 0 ? ",ceny brak" : ", cena " + cenaPakietu());
     }
-
-
-
 }

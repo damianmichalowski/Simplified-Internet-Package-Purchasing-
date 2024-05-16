@@ -1,25 +1,27 @@
 import java.util.ArrayList;
 
 public class Koszyk {
-    private ArrayList<Pakiet> pakiety;
+    private ArrayList<Pakiet> koszyk;
+    private Klient klient;
 
-    public Koszyk() {
-        this.pakiety = new ArrayList<>();
+    Koszyk(ArrayList<Pakiet> koszyk, Klient klient){
+        this.koszyk = koszyk;
+        this.klient = klient;
     }
 
-    public void dodaj(Pakiet pakiet) {
-        pakiety.add(pakiet);
+    public ArrayList<Pakiet> pobierzKoszyk() {
+        return new ArrayList<>(koszyk);
     }
 
-    public void wyczysc() {
-        pakiety.clear();
+    public Klient getKlient(){
+        return klient;
     }
 
-    public ArrayList<Pakiet> getPakiety(){
-        return pakiety;
-    }
-
-    public String toString(){
-        return pakiety.toString();
+    public String toString() {
+        String result = klient.getNazwa() + ":";
+        for (Pakiet p : koszyk) {
+            result = result.concat("\n"+p.toString());
+        }
+        return result + "\n";
     }
 }

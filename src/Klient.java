@@ -1,49 +1,62 @@
 import java.util.ArrayList;
 
-public class Klient {
-    int id;
-    String nazwa;
-    double kwota; //deklarowana kwota pieniedzy która chce wydać klient na pakiet
-    boolean abonament; // klient może ale nie musi posiadać abonament
-    static int counter = 0;
-    ListaZyczen listaZyczen; //wybierają pakiety i umieszczają je na liście życzeń
-    Koszyk koszyk; //z listy zyczen po wyczyszczeniu do koszyka
+enum MetodaPlatnosci {
+    KARTA,
+    PRZELEW
+}
 
-    public Klient(String nazwa, int kwota, boolean abonament) {
-        this.id = counter++;
+public class Klient {
+    private static int idCounter;
+    private int id;
+    private String nazwa;
+    private double kwota;
+    private boolean abonament;
+    private ArrayList<Pakiet> listaZyczen;
+    private ArrayList<Pakiet> koszyk;
+
+
+    Klient(String nazwa, double kwota, boolean abonament){
         this.nazwa = nazwa;
         this.kwota = kwota;
         this.abonament = abonament;
-        this.listaZyczen = new ListaZyczen();
-        this.koszyk = new Koszyk();
+        this.listaZyczen = new ArrayList<>();
+        this.koszyk = new ArrayList<>();
+        this.id = idCounter++;
     }
 
-    public int getId() {
-        return id;
-    };
-
-    public ListaZyczen pobierzListeZyczen(){
-        return listaZyczen;
-    };
-
-    public Koszyk pobierzKoszyk(){
-        return koszyk;
-    };
-
-    public double pobierzPortfel() {
-        return kwota;
+    public String getNazwa(){
+        return nazwa;
     }
 
-    public void dodaj(Pakiet pakiet){
-        listaZyczen.dodaj(pakiet);
-    };
+    public boolean getAbonament(){
+        return abonament;
+    }
+
+    public void dodaj(Pakiet pakiet) {
+        if (pakiet.getTyp().equals(TypPakietu.DARMO) && listaZyczen.stream().anyMatch(p -> p.getTyp().equals(TypPakietu.DARMO))) {
+            System.out.println("Pakiet darmowy może być dodany tylko raz.");
+        } else {
+            listaZyczen.add(pakiet);
+        }
+    }
+
+    public ListaZyczen pobierzListeZyczen() {
+        return new ListaZyczen(listaZyczen, this);
+    }
+
+    public Koszyk pobierzKoszyk() {
+        return new Koszyk(koszyk,this);
+    }
 
     public void przepakuj(){
-        koszyk.wyczysc();
-        for(Pakiet pakiet : listaZyczen.getPakiety()){
-            koszyk.dodaj(pakiet);
+        for (int i = listaZyczen.size() - 1; i >= 0; i--) {
+            if (listaZyczen.get(i).getTyp() != TypPakietu.DARMO) {
+                koszyk.add(listaZyczen.remove(i));
+            }
         }
-        listaZyczen.wyczysc();
-    };
+    }
 
+//TODO zaplac i zwroc
+//    public void zaplac();
+//    public void zwroc();
 }

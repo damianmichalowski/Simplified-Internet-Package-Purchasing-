@@ -1,23 +1,36 @@
+import java.util.ArrayList;
+
 public class GBTest {
     // cena pakietów danego typu z koszyka
-//    static int cena(Koszyk k, String nazwaPakietu) {
-//        /*<- tu trzeba wpisać ciało metody */
-//    };
+    static int cena(Koszyk k, String nazwaPakietu) {
+        int cena = 0;
+        ArrayList<Pakiet> koszyk = k.pobierzKoszyk();
+
+        for(Pakiet p : koszyk){
+            if(p.getNazwaPakietu().equals(nazwaPakietu)){
+                int okres = p.getOkres();
+                cena = p.cenaPakietu() * okres;
+            }
+        }
+
+        return cena;
+    }
 
     public static void main(String[] args) {
-        //cennik
+
+        // cennik
         Cennik cennik = Cennik.pobierzCennik();
 
         // dodawanie nowych cen do cennika
         cennik.dodaj(TypPakietu.KROTKI, "5GB", 20, 15, 3, 10); 	// 20 zł za 1 okres (jednorazowy),
-        // 15 zł za 1 okres (jeśli klient zakupi od 2 do 3 kolejnych okresów)
-        // 10 zł za 1 okres (jeśli klient zakupi co najmniej 4 kolejne okresy)
+                                                                                // 15 zł za 1 okres (jeśli klient zakupi od 2 do 3 kolejnych okresów)
+                                                                                // 10 zł za 1 okres (jeśli klient zakupi co najmniej 4 kolejne okresy)
 
         cennik.dodaj(TypPakietu.SREDNI, "10GB", 25, 2, 20);	// 25 zł za 1 okres (jeśli klient zakupi do 2 kolejnych okresów),
-        // 20 zł za 1 okres (jeśli klient zakupi od 3 kolejnych okresów)
+                                                                            // 20 zł za 1 okres (jeśli klient zakupi od 3 kolejnych okresów)
 
         cennik.dodaj(TypPakietu.DLUGI, "30GB", 30, 35);		// 30 zł za 1 okres jeśli klient ma abonament,
-        // 35 zł za 1 okres jeśli klient nie ma abonamentu
+                                                                            // 35 zł za 1 okres jeśli klient nie ma abonamentu
 
         cennik.dodaj(TypPakietu.DARMO, "1GB");			// darmowy dostęp (tylko na 1 okres oraz tylko 1 raz na klienta)
 
@@ -40,21 +53,20 @@ public class GBTest {
 
         System.out.println("Lista życzeń klienta " + listaLte);
 
-//        // Przed płaceniem, klient przepakuje pakiety z listy życzeń do koszyka (po uprzednim wyczyszczeniu).
-//        // Możliwe, że na liście życzeń są pakiety niemające ceny w cenniku,
-//        // w takim przypadku nie trafiłyby do koszyka
-//        Koszyk koszykLte = lte.pobierzKoszyk();
-//        lte.przepakuj();
-//
-//        // Co jest na liście życzeń klienta lte
-//        System.out.println("Po przepakowaniu, lista życzeń klienta " + lte.pobierzListeZyczen());
-//
-//        // Co jest w koszyku klienta lte
-//        System.out.println("Po przepakowaniu, koszyk klienta " + koszykLte);
-//
-//        // Ile wynosi cena wszystkich pakietów typu długoterminowego w koszyku klienta lte
-//        System.out.println("Pakiety 5GB w koszyku klienta lte kosztowały:  " + cena(koszykLte, "5GB"));
-//
+        // Przed płaceniem, klient przepakuje pakiety z listy życzeń do koszyka (po uprzednim wyczyszczeniu).
+        // Możliwe, że na liście życzeń są pakiety niemające ceny w cenniku,
+        // w takim przypadku nie trafiłyby do koszyka
+        Koszyk koszykLte = lte.pobierzKoszyk();
+        lte.przepakuj();
+
+        // Co jest na liście życzeń klienta lte
+        System.out.println("Po przepakowaniu, lista życzeń klienta " + lte.pobierzListeZyczen());
+
+        // Co jest w koszyku klienta lte
+        System.out.println("Po przepakowaniu, koszyk klienta " + koszykLte);
+
+        // Ile wynosi cena wszystkich pakietów typu długoterminowego w koszyku klienta lte
+        System.out.println("Pakiety 5GB w koszyku klienta lte kosztowały:  " + cena(koszykLte, "5GB"));
 //        // Klient zapłaci...
 //        lte.zaplac(KARTA, false);	// płaci kartą płatniczą, prowizja 1%
 //        // true oznacza, że w przypadku braku środków aplikacja sam odłoży nadmiarowe pakiety,
@@ -104,5 +116,6 @@ public class GBTest {
 //
 //        // Co zostało w koszyku klienta gsm
 //        System.out.println("Po zwrocie, koszyk klienta " + koszykGsm);
+
     }
 }
