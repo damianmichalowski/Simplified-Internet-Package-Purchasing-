@@ -11,12 +11,16 @@ public class ListaZyczen {
     }
 
     public String toString() {
-        String result = klient.getNazwa() + ":";
-        boolean abonament = klient.getAbonament();
-        for (Pakiet p : listaZyczen) {
-            int cena = p.cenaPakietu(abonament);
-            result = result.concat("\n"+p.toString() + (cena == 0 ? ",ceny brak" : ", cena " + cena));
-        }
-        return result + "\n";
+        if(!listaZyczen.isEmpty()){
+            String result = klient.getNazwa() + ":";
+            boolean abonament = klient.getAbonament();
+
+            for (Pakiet p : listaZyczen) {
+                int cena = p.cenaPakietu(abonament);
+                result = result.concat("\n"+p.toString() + (cena == 0 ? ", ceny brak" : ", cena " + cena));
+            }
+            return result + "\n";
+        }else
+            return "--pusto";
     }
 }

@@ -14,28 +14,32 @@ public class Pakiet {
         this.nazwaPakietu = nazwaPakietu;
         this.okres = okres;
     }
-    TypPakietu getTyp() {
+    public TypPakietu getTyp() {
         return null;
     }
 
-    String getNazwaPakietu() {
+    public String getNazwaPakietu() {
         return nazwaPakietu;
     }
 
-    int getOkres() {
+    public int getOkres() {
         return okres;
     }
-    int cenaPakietu(boolean abonament) {
+    public int cenaPakietu(boolean abonament) {
         return 0;
+    }
+
+    public void zmienOkres(int okres){
+        this.okres = okres;
     }
 
     @Override
     public String toString() {
         String typ = switch (getTyp()) {
-            case TypPakietu.KROTKI -> "krótkoterminowy";
-            case TypPakietu.SREDNI -> "średnioterminowy";
-            case TypPakietu.DLUGI -> "długoterminowy";
-            case TypPakietu.DARMO -> "darmowy";
+            case KROTKI -> "krótkoterminowy";
+            case SREDNI -> "średnioterminowy";
+            case DLUGI -> "długoterminowy";
+            case DARMO -> "darmowy";
             default -> "";
         };
 

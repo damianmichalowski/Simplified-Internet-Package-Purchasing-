@@ -24,17 +24,15 @@ public class GBTest {
 
         // dodawanie nowych cen do cennika
         cennik.dodaj(TypPakietu.KROTKI, "5GB", 20, 15, 3, 10); 	// 20 zł za 1 okres (jednorazowy),
-                                                                                // 15 zł za 1 okres (jeśli klient zakupi od 2 do 3 kolejnych okresów)
-                                                                                // 10 zł za 1 okres (jeśli klient zakupi co najmniej 4 kolejne okresy)
-
+        // 15 zł za 1 okres (jeśli klient zakupi od 2 do 3 kolejnych okresów)
+        // 10 zł za 1 okres (jeśli klient zakupi co najmniej 4 kolejne okresy)
         cennik.dodaj(TypPakietu.SREDNI, "10GB", 25, 2, 20);	// 25 zł za 1 okres (jeśli klient zakupi do 2 kolejnych okresów),
-                                                                            // 20 zł za 1 okres (jeśli klient zakupi od 3 kolejnych okresów)
+        // 20 zł za 1 okres (jeśli klient zakupi od 3 kolejnych okresów)
 
         cennik.dodaj(TypPakietu.DLUGI, "30GB", 30, 35);		// 30 zł za 1 okres jeśli klient ma abonament,
-                                                                            // 35 zł za 1 okres jeśli klient nie ma abonamentu
+        // 35 zł za 1 okres jeśli klient nie ma abonamentu
 
         cennik.dodaj(TypPakietu.DARMO, "1GB");			// darmowy dostęp (tylko na 1 okres oraz tylko 1 raz na klienta)
-
 
         // Klient lte deklaruje kwotę 200 zł na zamównienia; true oznacza, że klient posiada abonament
         Klient lte = new Klient("lte", 200, true);
@@ -68,55 +66,55 @@ public class GBTest {
 
         // Ile wynosi cena wszystkich pakietów typu długoterminowego w koszyku klienta lte
         System.out.println("Pakiety 5GB w koszyku klienta lte kosztowały:  " + cena(koszykLte, "5GB"));
-//        // Klient zapłaci...
-//        lte.zaplac(KARTA, false);	// płaci kartą płatniczą, prowizja 1%
-//        // true oznacza, że w przypadku braku środków aplikacja sam odłoży nadmiarowe pakiety,
-//        // false oznacza rezygnację z płacenia razem z wyczyszczeniem koszyka i listy życzeń
-//
-//        // Ile klientowi lte zostało pieniędzy?
-//        System.out.println("Po zapłaceniu, klientowi lte zostało: " + lte.pobierzPortfel() + " zł");
-//
-//        // Mogło klientowi zabraknąć srodków, wtedy, opcjonalnie, pakiety mogą być odkładane,
-//        // w przeciwnym przypadku, koszyk jest pusty po zapłaceniu
-//        System.out.println("Po zapłaceniu, koszyk klienta " + lte.pobierzKoszyk());
-//        System.out.println("Po zapłaceniu, koszyk klienta " + koszykLte);
-//
-//        // Teraz przychodzi klient gsm,
-//        // deklaruje 65 zł na zamówienia
-//        Klient gsm = new Klient("gsm", 65, false);
-//
-//        // Zamówił za dużo jak na tę kwotę
-//        gsm.dodaj(new Sredni("10GB", 2));
-//        gsm.dodaj(new Dlugi("30GB", 1));
-//
-//        // Co klient gsm ma na swojej liście życzeń
-//        System.out.println("Lista życzeń klienta " + gsm.pobierzListeZyczen());
-//
-//        Koszyk koszykGsm = gsm.pobierzKoszyk();
-//        gsm.przepakuj();
-//
-//        // Co jest na liście życzeń klienta gsm
-//        System.out.println("Po przepakowaniu, lista życzeń klienta " + gsm.pobierzListeZyczen());
-//
-//        // A co jest w koszyku klienta gsm
-//        System.out.println("Po przepakowaniu, koszyk klienta " + gsm.pobierzKoszyk());
-//
-//        // klient gsm płaci
-//        gsm.zaplac(PRZELEW, true);	// płaci przelewem, bez prowizji
-//
-//        // Ile klientowi gsm zostało pieniędzy?
-//        System.out.println("Po zapłaceniu, klientowi gsm zostało: " + gsm.pobierzPortfel() + " zł");
-//
-//        // Co zostało w koszyku klienta gsm (za mało pieniędzy miał)
-//        System.out.println("Po zapłaceniu, koszyk klienta " + koszykGsm);
-//
-//        gsm.zwroc(DLUGI, "30GB", 1);	// zwrot (do koszyka) pakietu (na 1 okres) z ostatniej transakcji
-//
-//        // Ile klientowi gsm zostało pieniędzy?
-//        System.out.println("Po zwrocie, klientowi gsm zostało: " + gsm.pobierzPortfel() + " zł");
-//
-//        // Co zostało w koszyku klienta gsm
-//        System.out.println("Po zwrocie, koszyk klienta " + koszykGsm);
+        // Klient zapłaci...
+        lte.zaplac(MetodaPlatnosci.KARTA, false);	// płaci kartą płatniczą, prowizja 1%
+        // true oznacza, że w przypadku braku środków aplikacja sama odłoży nadmiarowe pakiety,
+        // false oznacza rezygnację z płacenia razem z wyczyszczeniem koszyka i listy życzeń jesli nie stac
+
+        // Ile klientowi lte zostało pieniędzy?
+        System.out.println("\nPo zapłaceniu, klientowi lte zostało: " + lte.pobierzPortfel() + " zł\n");
+
+        // Mogło klientowi zabraknąć srodków, wtedy, opcjonalnie, pakiety mogą być odkładane,
+        // w przeciwnym przypadku, koszyk jest pusty po zapłaceniu
+        System.out.println("Po zapłaceniu, koszyk klienta " + lte.pobierzKoszyk());
+        System.out.println("Po zapłaceniu, koszyk klienta " + koszykLte);
+
+        // Teraz przychodzi klient gsm,
+        // deklaruje 65 zł na zamówienia
+        Klient gsm = new Klient("gsm", 65, false);
+
+        // Zamówił za dużo jak na tę kwotę
+        gsm.dodaj(new Sredni("10GB", 2));
+        gsm.dodaj(new Dlugi("30GB", 1));
+
+        // Co klient gsm ma na swojej liście życzeń
+        System.out.println("\nLista życzeń klienta " + gsm.pobierzListeZyczen());
+
+        Koszyk koszykGsm = gsm.pobierzKoszyk();
+        gsm.przepakuj();
+
+        // Co jest na liście życzeń klienta gsm
+        System.out.println("Po przepakowaniu, lista życzeń klienta " + gsm.pobierzListeZyczen());
+
+        // A co jest w koszyku klienta gsm
+        System.out.println("\nPo przepakowaniu, koszyk klienta " + gsm.pobierzKoszyk());
+
+        // klient gsm płaci
+        gsm.zaplac(MetodaPlatnosci.PRZELEW, true);	// płaci przelewem, bez prowizji
+
+        // Ile klientowi gsm zostało pieniędzy?
+        System.out.println("Po zapłaceniu, klientowi gsm zostało: " + gsm.pobierzPortfel() + " zł\n");
+
+        // Co zostało w koszyku klienta gsm (za mało pieniędzy miał)
+        System.out.println("Po zapłaceniu, koszyk klienta " + koszykGsm);
+
+        gsm.zwroc(TypPakietu.DLUGI, "30GB", 1);	// zwrot (do koszyka) pakietu (na 1 okres) z ostatniej transakcji
+
+        // Ile klientowi gsm zostało pieniędzy?
+        System.out.println("Po zwrocie, klientowi gsm zostało: " + gsm.pobierzPortfel() + " zł");
+
+        // Co zostało w koszyku klienta gsm
+        System.out.println("Po zwrocie, koszyk klienta " + koszykGsm);
 
     }
 }

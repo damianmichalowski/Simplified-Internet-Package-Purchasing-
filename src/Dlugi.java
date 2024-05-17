@@ -11,7 +11,7 @@ public class Dlugi extends Pakiet{
         return typ;
     }
 
-    //TODO abonament
+    @Override
     public int cenaPakietu(boolean abonament) {
         int result = 0;
         Integer[] ceny = cennik.pobierzCeny(typ, nazwaPakietu);

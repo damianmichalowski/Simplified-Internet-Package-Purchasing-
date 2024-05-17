@@ -16,9 +16,10 @@ public class Sredni extends Pakiet{
         int result = 0;
         Integer[] ceny = cennik.pobierzCeny(typ, nazwaPakietu);
 
-        if(okres <= 2)
+        int doIluOkresow = ceny[1];
+        if(okres <= doIluOkresow)
             result += ceny[0];
-        else
+        else if (okres > doIluOkresow)
             result += ceny[2];
 
         return result;

@@ -16,11 +16,12 @@ public class Krotki extends Pakiet {
         int result = 0;
         Integer[] ceny = cennik.pobierzCeny(typ, nazwaPakietu);
 
+        int doIluOkresow = ceny[2];
         if(okres == 1)
             result += ceny[0];
-        else if(okres >= 2 && okres <= 3)
+        else if(okres >= 2 && okres < doIluOkresow)
             result += ceny[1];
-        else if(okres >= 4)
+        else if(okres >= doIluOkresow)
             result += ceny[3];
 
         return result;
