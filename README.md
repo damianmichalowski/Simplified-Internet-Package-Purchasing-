@@ -1,6 +1,6 @@
 Uzycie, skompilować poprzez funkcje pliku GBTest
  
-# java
+# Simplified Internet Package Ordering/Purchasing Simulation Application in a Telecommunications Company
 Opis Projekty
 
 Aplikacja symulująca uproszczony proces zamawiania/zakupu pakietów internetowych w pewnej firmie telekomunikacyjnej.
